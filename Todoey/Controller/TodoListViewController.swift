@@ -12,11 +12,15 @@ class TodoListViewController: UITableViewController {
     var itemArray = [Item]()
     // "Find Make", "Buy Eggos", "Destory Demogorgon", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "j", "k", "l", "m", "n", "o"
     
-    let defaults = UserDefaults.standard
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathExtension("Items.plist")
     
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(dataFilePath)
+        
         
         let newItem = Item()
         newItem.title = "Find Mike"
@@ -30,9 +34,9 @@ class TodoListViewController: UITableViewController {
         newItem.title = "Find Mike"
         itemArray.append(newItem3)
         
-        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
-            itemArray = items
-        }
+        //        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
+        //            itemArray = items
+        //        }
         
     }
     
@@ -58,7 +62,7 @@ class TodoListViewController: UITableViewController {
         
         // Ternary operator ==>
         // value = condition ? valueIfTrue : valueIfFalse
-                
+        
         cell.accessoryType = item.done ? .checkmark : .none
         
         return cell
@@ -68,29 +72,27 @@ class TodoListViewController: UITableViewController {
     //MARK: - TableView Delegate Method
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // print(itemAray[indexPath.row])
+        // print(itemAray[indexPath.row])
         
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        
+        saveItems()
         
         if itemArray[indexPath.row].done == false {
             itemArray[indexPath.row].done = true
         } else {
             itemArray[indexPath.row].done = false
         }
-        
-        
-        tableView.reloadData()
-        
         // make a checkmark
-//        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-//        } else {
-//            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-//        }
+        //        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
+        //            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        //        } else {
+        //            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        //        }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
     
     //MARK: - Add New Items
     
@@ -100,16 +102,14 @@ class TodoListViewController: UITableViewController {
         let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
-          // what will happen once the user clicks the Add Item button on our UIAlert
+            // what will happen once the user clicks the Add Item button on our UIAlert
             //print(textField.text)
             
             let newItem = Item()
             newItem.title = textField.text!
             self.itemArray.append(newItem)
             
-            self.defaults.set(self.itemArray, forKey: "TodoListArray")
-            
-            self.tableView.reloadData()
+            self.saveItems()
         }
         
         alert.addTextField { alertTextField in
@@ -122,5 +122,18 @@ class TodoListViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    //MARK: - Model Manupulation Metods
+    
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        
+        do {
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("Error encoding item array, \(error)")
+        }
+        
+        self.tableView.reloadData()
+    }
 }
-
