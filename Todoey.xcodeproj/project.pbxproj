@@ -14,6 +14,7 @@
 		BE750FFA29C4F8F7007269B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE750FF929C4F8F7007269B7 /* Assets.xcassets */; };
 		BE750FFD29C4F8F7007269B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE750FFB29C4F8F7007269B7 /* LaunchScreen.storyboard */; };
 		BE9DD36D29CDBA4700A9E9F5 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE9DD36B29CDBA4700A9E9F5 /* DataModel.xcdatamodeld */; };
+		BEAC0B2029D429460091F954 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAC0B1F29D429460091F954 /* CategoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		BE750FFC29C4F8F7007269B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE750FFE29C4F8F7007269B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE9DD36C29CDBA4700A9E9F5 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		BEAC0B1F29D429460091F954 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,7 @@
 		BE2878CB29C9E5E900ABB038 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				BEAC0B1F29D429460091F954 /* CategoryViewController.swift */,
 				BE750FF429C4F8F6007269B7 /* TodoListViewController.swift */,
 			);
 			path = Controller;
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEAC0B2029D429460091F954 /* CategoryViewController.swift in Sources */,
 				BE9DD36D29CDBA4700A9E9F5 /* DataModel.xcdatamodeld in Sources */,
 				BE750FF529C4F8F6007269B7 /* TodoListViewController.swift in Sources */,
 				BE750FF129C4F8F6007269B7 /* AppDelegate.swift in Sources */,
